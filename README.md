@@ -1,2 +1,2 @@
 # mvc-reference
-MVC Reference Project
+DotNet Core MVC Reference Project
