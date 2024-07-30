@@ -1,0 +1,29 @@
+@model MVCReferenceProject.Models.LoginModel
+
+<h1>Form</h1>
+
+<h3>Weak Form</h3>
+@using(Html.BeginForm("FormPost", "Form", FormMethod.Post)){
+<div>
+    Username: @Html.TextBox("Username")
+</div>
+<div>
+    Password: @Html.Password("Password")
+</div>
+<div>
+    <input type="submit" value="Login"/>
+</div>
+}
+
+<h3>Strong Form</h3>
+@using(Html.BeginForm("FormPostStrong", "Form", FormMethod.Post)){
+<div>
+    Username: @Html.TextBoxFor(m => m.Username)
+</div>
+<div>
+    Password: @Html.PasswordFor(m => m.Password)
+</div>
+<div>
+    <input type="submit" value="Login"/>
+</div>
+}

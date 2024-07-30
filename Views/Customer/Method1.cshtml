@@ -1,0 +1,14 @@
+
+
+<h1>Method 1</h1>
+
+
+@TempData["Message"]
+@{
+    TempData.Keep("Message");
+}
+
+<a asp-controller="Customer" asp-action="Method2">Go to Method 2</a><br/>
+
+Persistent session data: @ViewBag.SessionVariable<br/>
+QueryString example value: @ViewBag.QueryStr

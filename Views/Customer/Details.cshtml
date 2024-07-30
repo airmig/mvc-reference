@@ -1,0 +1,18 @@
+@{
+    
+}
+
+<h1>Details Page</h1>
+
+There are @ViewData["CustomerCount"] customers
+
+<table>
+@foreach(var customer in @ViewData["CustomerList"] as List<Customer>){
+    <tr>
+        <td>@customer.Id</td>
+        <td>@customer.Name</td>
+        <td>@customer.Amount</td>
+    </tr>
+}
+
+</table>

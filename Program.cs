@@ -1,7 +1,16 @@
+using   MVCReferenceProject;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add session state
+builder.Services.AddSession(options=>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(20);
+    options.Cookie.HttpOnly = true;
+});
 
 var app = builder.Build();
 
@@ -20,8 +29,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseMyMiddleware();
 
 app.Run();
