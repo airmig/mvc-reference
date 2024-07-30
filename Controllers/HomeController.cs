@@ -28,6 +28,20 @@ public class HomeController : Controller
         return View();
     }
 
+    public ViewResult ViewResultMessage(){
+        return View();
+    }
+
+    //other types of results
+    //EmptyResult
+    //ContentResult -> string literal
+    //FileContentResult -> the content of a file
+    //RedirectResult -> redirection
+    //JsonResult
+    //PartialViewResult -> partial view
+    //JavaScriptResult
+    //HttpUnauthorizedResult
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

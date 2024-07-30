@@ -1,0 +1,33 @@
+@{
+
+}
+<h1>Customer View</h1>
+<p>@ViewBag.Message</p>
+
+<p>There are @ViewBag.CustomerCount customers</p>
+<ul>
+    @foreach(var customer in @ViewBag.CustomerList){
+        <li>@customer.Id - @customer.Name - @customer.Amount</li>
+    }
+</ul>
+
+<hr/>
+@Html.ActionLink("Home Page","Message","Home")
+
+<h3>Tag Helper</h3>
+<!-- 
+sample helper <input asp-for="name" placeholder="Enter Name" class="form-control"/> -->
+
+<a asp-controller="Home" asp-action="Message">Message</a>
+<!--
+HTML Helpers
+
+Html.ActionLink()
+Html.TextBox()
+Html.TextArea()
+Html.CheckBox()
+Html.RadioButton()
+Html.DropDownList()
+Html.ListBox()
+Html.Hidden()
+-->
