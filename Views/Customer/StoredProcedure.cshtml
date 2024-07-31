@@ -1,0 +1,18 @@
+@model IEnumerable<MVCReferenceProject.Models.Customer>
+
+<table>
+    <tr>
+    <td>Id</td>
+    <td>Name</td>
+    <td>Amount</td>
+    <td>City</td>
+    </tr>
+@foreach(var customer in Model){
+    <tr>
+    <td>@customer.Id</td>
+    <td>@customer.Name</td>
+    <td>@customer.Amount</td>
+    <td>@customer.City</td>
+    </tr>
+}
+</table>

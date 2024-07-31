@@ -5,9 +5,17 @@
 <p>@ViewBag.Message</p>
 
 <p>There are @ViewBag.CustomerCount customers</p>
+<a asp-action="Create">Create</a>
 <ul>
     @foreach(var customer in @ViewBag.CustomerList){
-        <li>@customer.Id - @customer.Name - @customer.Amount</li>
+        <li>@customer.Id - @customer.Name - @customer.Amount
+            <a asp-action="Edit" asp-route-id="@customer.Id">Edit</a>
+            &nbsp;
+            <a asp-action="Detail" asp-route-id="@customer.Id">Details</a>
+            &nbsp;
+            <a asp-action="Delete" asp-route-id="@customer.Id">Delete</a>
+            &nbsp;
+        </li>
     }
 </ul>
 
