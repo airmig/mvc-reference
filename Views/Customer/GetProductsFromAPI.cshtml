@@ -1,0 +1,13 @@
+@model IEnumerable<MVCReferenceProject.Models.ProductWebApiModel>
+
+<Title>Products from webapi</Title>
+
+<table>
+@foreach(var product in Model){
+    <tr>
+        <td>@product.Id</td>
+        <td>@product.ProductDescription</td>
+        <td>@product.ProductLocation</td>
+    </tr>
+}
+</table>

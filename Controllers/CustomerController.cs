@@ -1,10 +1,12 @@
 using System.Diagnostics;
+using System.Text;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using MVCReferenceProject.Models;
 using MVCReferenceProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 namespace MVCReferenceProject.Controllers;
 
 //Individual Account Authentication
@@ -73,7 +75,7 @@ public class CustomerController : Controller
     }
 
     public IActionResult Detail(int id){
-        if (id==null|| _context.Customers == null){
+        if (_context.Customers == null){
             return View("NotFound");
         }
         var customer = _context.Customers.Find(id);
@@ -185,5 +187,34 @@ public class CustomerController : Controller
             return View("NotFound");
         }
         return View(customers);
+    }
+
+    public async Task<IActionResult> GetProductsFromAPI(){
+        List<ProductWebApiModel>? products = [];
+        using var client = new HttpClient();
+        using (var response = await client.GetAsync("http://localhost:5053/api/Products"))
+        {
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            products = JsonConvert.DeserializeObject<List<ProductWebApiModel>>(apiResponse);
+        }
+        return View(products);
+    }
+
+    public async Task<IActionResult> NewProductAPI(){
+        List<ProductWebApiModel>? products = [];
+        ProductWebApiModel product = new() { ProductDescription="newdescription", ProductLocation="newLocation"};
+
+        var json = JsonConvert.SerializeObject(product);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        using var client = new HttpClient();
+        using var apiResponse = await client.PostAsync("http://localhost:5053/api/Products", content);
+        if (apiResponse.IsSuccessStatusCode){
+            using var response = await client.GetAsync("http://localhost:5053/api/Products");
+            string responseText = await response.Content.ReadAsStringAsync();
+            products = JsonConvert.DeserializeObject<List<ProductWebApiModel>>(responseText);
+            return View("GetProductsFromAPI",products);
+        }
+        return View("Home");
     }
 }
